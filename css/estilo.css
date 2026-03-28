@@ -1,0 +1,471 @@
+/*estrutura*/
+*{
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+
+body{
+    background: linear-gradient(75deg, rgba(6, 6, 68, 0.973), rgba(2, 3, 15, 0.952)) no-repeat center center fixed;
+    background: url(../img/starfall-gif-46.gif) no-repeat;
+    background-size: cover;
+    color: #fff;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 88px; /* espaço para menu fixo */
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+body.page-exit {
+    opacity: 0;
+}
+
+main {
+    text-align: center;
+    width: min(100%, 960px);
+    padding: 1.5rem 1rem 3rem;
+}
+
+h1 {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+#container nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+figure {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin: 0;
+    width: 140px;
+}
+
+figure:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+figure img {
+    width: 100%;
+    height: 140px;
+    max-width: 140px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    transition: border-color 0.3s, transform 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+figure:hover img {
+    border-color: #ffffff;
+}
+
+figcaption {
+    margin-top: 0.5rem;
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    color: #fff;
+}
+
+#menu-superior {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 16px;
+}
+
+.logo {
+    margin: 25px 0 0 20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo img {
+    width: 130px;
+    max-width: 160px;
+    height: auto;
+}
+
+.menu {
+    margin: 5px 20px 0 0;
+    position: relative;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: linear-gradient(rgb(7, 4, 36), #070716);
+    transition: background 0.3s, transform 0.2s;
+}
+
+.menu a:hover {
+    background: linear-gradient(cyan, rgb(1, 200, 235));
+    transform: translateY(-1px);
+}
+/*Particulas efeito*/
+.particles {
+    position: fixed; /* Fixo na tela */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Não interfere com cliques */
+    z-index: -1; /* Atrás do conteúdo */
+}
+
+.particle {
+    position: absolute;
+    bottom: 0;
+    left: 10%; /* Começa no canto esquerdo */
+    width: 4px;
+    height: 4px;
+    background: #0fb3ff; /* Amarelo */
+    border-radius: 75%;
+    opacity: 0; /* Invisível inicialmente */
+    animation: fadeIn 2s ease-in-out forwards, float 8s linear 2s infinite; /* Fade in primeiro, depois subida */
+}
+
+.particle:nth-child(2) {
+    left: 20%;
+    animation: fadeIn 2s ease-in-out 0.5s forwards, float 10s linear 2.5s infinite; /* Delay no fadeIn e float */
+}
+
+.particle:nth-child(3) {
+    left: 30%;
+    animation: fadeIn 2s ease-in-out 1s forwards, float 7s linear 3s infinite;
+}
+
+.particle:nth-child(4) {
+    left: 15%;
+    animation: fadeIn 2s ease-in-out 1.5s forwards, float 9s linear 3.5s infinite;
+}
+
+.particle:nth-child(5) {
+    left: 25%;
+    animation: fadeIn 2s ease-in-out 2s forwards, float 6s linear 4s infinite;
+}
+
+/* Keyframes para fade in inicial */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.8;
+    }
+}
+
+/* Keyframes para animação de subida e piscar */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.8;
+    }
+    10% {
+        opacity: 3;
+    }
+    90% {
+        opacity: 3;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50px); /* Sobe e move ligeiramente */
+        opacity: 0;
+    }
+}
+
+/*fim Particulas efeito*/
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 130px;
+    }
+
+    #container nav {
+        gap: 1rem;
+    }
+
+    figure {
+        width: 125px;
+    }
+
+    #menu-superior {
+        padding: 20px 12px;
+    }
+
+    .logo img {
+        width: 110px;
+    }
+
+    .menu {
+        font-size: 0.9rem;
+    }
+
+    .menu a {
+        margin-left: 0.6rem;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 164px;
+    }
+
+    h1 {
+        margin-bottom: 1.25rem;
+    }
+
+    figure {
+        width: 98px;
+    }
+
+    figure img {
+        max-width: 98px;
+        max-height: 100px;
+        max-width: 140px;
+    }
+
+    .logo img {
+        width: 98px;
+    }
+
+    .menu a {
+        font-size: 0.85rem;
+        margin-left: 0.4rem;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    figcaption {
+        font-size: 0.9rem;
+    }
+
+    #container nav {
+        gap: 0.75rem;
+    }
+
+    figure {
+        width: 84px;
+    }
+
+    figure img {
+        max-width: 84px;
+        max-height: 90px;
+    }
+
+    .logo img {
+        width: 85px;
+    }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: linear-gradient(75deg, rgba(255, 255, 255, 0.9), rgba(200, 200, 200, 0.8)) no-repeat center center fixed,
+                url(../img/starfall-gif-46.gif) no-repeat center center fixed;
+    background-size: cover;
+    color: #000;
+}
+
+body.dark-mode .logo img {
+    /*filter: invert(1) brightness(1.2);*/
+    content: url(../img/black.png);
+}
+
+body.dark-mode h1,
+body.dark-mode figcaption {
+    color: #000;
+}
+
+body.dark-mode figure:hover img {
+    border-color: aqua;
+}
+
+body.dark-mode .menu a {
+    color: #000;
+    background: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+    border: rgb(0, 255, 255)
+}
+
+body.dark-mode .menu a:hover {
+    background: linear-gradient(#333, #666);
+    color: #fff;
+}
+
+body.dark-mode #config-btn {
+    background: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+}
+
+body.dark-mode #config-btn:hover {
+    background: linear-gradient(cyan, rgb(1, 200, 235));
+}
+
+/* Header Right */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Theme Toggle */
+#theme-toggle {
+    margin-top: 25px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(0, 255, 255, 0.1);
+}
+
+/* Dropdown Menu */
+.menu {
+    position: relative;
+}
+
+#config-btn {
+    margin-top: 25px;
+    background: linear-gradient(rgb(7, 4, 36), #070716);
+    border: 2px solid cyan;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+#config-btn:hover {
+    background: linear-gradient(cyan, rgb(1, 200, 235));
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: none;
+    border-radius: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 150px;
+    display: none;
+    z-index: 200;
+}
+
+.dropdown-menu li {
+    border-bottom: none
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background: aqua;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Dark Mode Dropdown */
+body.dark-mode .dropdown-menu {
+    background: none;
+}
+
+body.dark-mode .dropdown-menu a {
+    color: #000;
+}
+
+body.dark-mode .dropdown-menu a:hover {
+    background: rgba(0, 255, 255, 0.801);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-right {
+        gap: 0.5rem;
+    }
+
+    #theme-toggle {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    #config-btn {
+        font-size: 0.9rem;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    #theme-toggle {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    #config-btn {
+        font-size: 0.85rem;
+        padding: 5px 7px;
+    }
+}
+

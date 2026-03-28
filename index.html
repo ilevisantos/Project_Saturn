@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar perfil | Disney+</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="shortcut icon" href="img/d.png" type="image/x-icon">
+</head>
+<body>
+    <header id="menu-superior" role="banner">
+        <a class="logo" href="index.html" aria-label="Disney+ Home">
+            <img if black-mode: src="img/white.png" alt="Logo Disney+">
+        </a>
+        <div class="header-right">
+            <button id="theme-toggle" aria-label="Alternar tema">🌙</button>
+            <nav class="menu" aria-label="Menu de usuário">
+                <button id="config-btn">Configurações ▼</button>
+                <ul id="dropdown-menu" class="dropdown-menu">
+                    <li><a href="#">Editar Perfis</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                    <li><a href="#">Conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Quem vai assistir?</h1>
+        <section id="container" aria-label="Perfis disponíveis"> <!--Selecionar perfil-->
+            <nav>
+                
+                <a class="profile" href="catalogo/catalogo.html">
+                    <figure>
+                        <img src="img/perfil1.jpg" alt="">
+                        <figcaption>Caio</figcaption>
+                    </figure>
+                </a>
+                <a class="profile" href="catalogo/catalogo.html">
+                    <figure>
+                        <img src="img/perfil2.jpg" alt="">
+                        <figcaption>Ana</figcaption>
+                    </figure>
+                </a>
+                <a class="profile" href="catalogo/catalogo.html">
+                    <figure>
+                        <img src="img/perfil3.jpg" alt="">
+                        <figcaption>Edson</figcaption>
+                    </figure>
+                </a>
+                <a class="profile" href="criar_conta.html">
+                    <figure>
+                        <img src="img/+.png" alt="">
+                        <figcaption>Criar novo perfil</figcaption>
+                    </figure>
+                </a>
+                
+            </nav>
+        </section>
+    </main>
+
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
