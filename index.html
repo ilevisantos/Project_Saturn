@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selecionar perfil | Disney+</title>
+    <title>Selecionar perfil | Saturn</title>
     <link rel="stylesheet" href="css/estilo.css">
-    <link rel="shortcut icon" href="img/d.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 <body>
     <header id="menu-superior" role="banner">
         <a class="logo" href="index.html" aria-label="Disney+ Home">
-            <img if black-mode: src="img/white.png" alt="Logo Disney+">
+            <img if black-mode: src="img/logowhite.png" alt="Logo Disney+">
         </a>
         <div class="header-right">
             <button id="theme-toggle" aria-label="Alternar tema">🌙</button>
             <nav class="menu" aria-label="Menu de usuário">
                 <button id="config-btn">Configurações ▼</button>
                 <ul id="dropdown-menu" class="dropdown-menu">
-                    <li><a href="#">Editar Perfis</a></li>
+                    <li><a href="#" id="edit-profiles">Editar Perfis</a></li>
                     <li><a href="#">Ajuda</a></li>
                     <li><a href="#">Conta</a></li>
                 </ul>
@@ -27,37 +27,39 @@
 
     <main>
         <h1>Quem vai assistir?</h1>
-        <section id="container" aria-label="Perfis disponíveis"> <!--Selecionar perfil-->
-            <nav>
-                
-                <a class="profile" href="catalogo/catalogo.html">
-                    <figure>
-                        <img src="img/perfil1.jpg" alt="">
-                        <figcaption>Caio</figcaption>
-                    </figure>
-                </a>
-                <a class="profile" href="catalogo/catalogo.html">
-                    <figure>
-                        <img src="img/perfil2.jpg" alt="">
-                        <figcaption>Ana</figcaption>
-                    </figure>
-                </a>
-                <a class="profile" href="catalogo/catalogo.html">
-                    <figure>
-                        <img src="img/perfil3.jpg" alt="">
-                        <figcaption>Edson</figcaption>
-                    </figure>
-                </a>
-                <a class="profile" href="criar_conta.html">
-                    <figure>
-                        <img src="img/+.png" alt="">
-                        <figcaption>Criar novo perfil</figcaption>
-                    </figure>
-                </a>
-                
+        <section id="container" aria-label="Perfis disponíveis">
+            <nav id="profiles-list">
+                <!-- As perfis serão carregados via JavaScript -->
             </nav>
         </section>
     </main>
+
+    <div class="modal-overlay hidden" id="profile-modal" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button type="button" class="modal-close" id="modal-close" aria-label="Fechar formulário">×</button>
+            <h2 id="modal-title">Adicionar perfil</h2>
+            <form id="profile-form">
+                <label for="profile-name">Nome do perfil</label>
+                <input id="profile-name" name="profileName" type="text" maxlength="20" placeholder="Digite um nome" required>
+
+                <p>Escolha um avatar padrão</p>
+                <div class="avatar-options">
+                    <button type="button" class="avatar-option" data-image="img/perfil1.jpg" aria-label="Avatar padrão 1"><img src="img/perfil1.jpg" alt="Avatar 1"></button>
+                    <button type="button" class="avatar-option" data-image="img/perfil2.jpg" aria-label="Avatar padrão 2"><img src="img/perfil2.jpg" alt="Avatar 2"></button>
+                    <button type="button" class="avatar-option" data-image="img/perfil3.jpg" aria-label="Avatar padrão 3"><img src="img/perfil3.jpg" alt="Avatar 3"></button>
+                    <button type="button" class="avatar-option" data-image="img/perfil4.jpg" aria-label="Avatar padrão 4"><img src="img/perfil4.jpg" alt="Avatar 4"></button>
+                    <button type="button" class="avatar-option" data-image="img/perfil5.jpg" aria-label="Avatar padrão 5"><img src="img/perfil5.jpg" alt="Avatar 5"></button>
+                    <button type="button" class="avatar-option" data-image="img/perfil6.jpg" aria-label="Avatar padrão 6"><img src="img/perfil6.jpg" alt="Avatar 6"></button>
+                    <button type="button" class="avatar-option" data-image="img/perfil7.jpg" aria-label="Avatar padrão 7"><img src="img/perfil7.jpg" alt="Avatar 7"></button>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit">Salvar</button>
+                    <button type="button" id="cancel-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="particles">
         <div class="particle"></div>

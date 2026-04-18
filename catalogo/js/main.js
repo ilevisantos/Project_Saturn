@@ -2,15 +2,69 @@ import { categories } from './data.js';
 import { createCarousel } from './components/Carousel.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const nomePerfil = localStorage.getItem('perfilAtivoNome');
-    const imagemPerfil = localStorage.getItem('perfilAtivoImagem');
+    // Load active profile from localStorage
+    const activeProfileData = localStorage.getItem('activeProfile');
+    function resolveProfileImagePath(imagePath) {
+        if (!imagePath || typeof imagePath !== 'string') return imagePath;
+        if (imagePath.startsWith('../') || imagePath.startsWith('/')) {
+            return imagePath;
+        }
+        if (imagePath.startsWith('img/')) {
+            return `../${imagePath}`;
+        }
+        if (imagePath.startsWith('./img/')) {
+            return imagePath.replace(/^\.\/img\//, '../img/');
+        }
+        return imagePath;
+    }
 
-    if (nomePerfil && imagemPerfil) {
-        const kidsLink = document.querySelector('.kids-link');
-        const profileIcon = document.querySelector('.profile-icon');
-        
-        if (kidsLink) kidsLink.textContent = nomePerfil;
-        if (profileIcon) profileIcon.src = imagemPerfil;
+    if (activeProfileData) {
+        try {
+            const activeProfile = JSON.parse(activeProfileData);
+            const kidsLink = document.querySelector('.kids-link');
+            const profileIcon = document.querySelector('.profile-icon');
+            
+            if (kidsLink && activeProfile.name) {
+                kidsLink.textContent = activeProfile.name;
+            }
+            if (profileIcon && activeProfile.image) {
+                profileIcon.src = resolveProfileImagePath(activeProfile.image);
+                profileIcon.alt = activeProfile.name || 'Perfil';
+            }
+        } catch (error) {
+            console.error('Error parsing active profile data:', error);
+        }
+    }
+
+    // Notification dropdown functionality
+    const notificationIcon = document.querySelector('.nav-notification');
+    const notificationDropdown = document.querySelector('.notification-dropdown');
+    const miniNavbar = document.querySelector('.mini-navbar');
+
+    if (notificationIcon && notificationDropdown) {
+        notificationIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('show');
+            
+            // Move mini navbar when notification is open
+            if (miniNavbar) {
+                if (notificationDropdown.classList.contains('show')) {
+                    miniNavbar.style.transform = 'translateX(-50px)';
+                } else {
+                    miniNavbar.style.transform = 'translateX(0)';
+                }
+            }
+        });
+
+        // Close notification dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!notificationIcon.contains(e.target)) {
+                notificationDropdown.classList.remove('show');
+                if (miniNavbar) {
+                    miniNavbar.style.transform = 'translateX(0)';
+                }
+            }
+        });
     }
 
     const allItems = categories.flatMap((category, categoryIndex) =>
@@ -145,4 +199,100 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         setTimeout(initDragFunctionality, 100);
     });
+
+    // Search functionality
+    const searchIcon = document.getElementById('search-icon');
+    const searchInput = document.getElementById('search-input');
+    const searchContainer = document.querySelector('.search-container');
+    const navbarRight = document.querySelector('.navbar-right');
+    const mainContent = document.getElementById('main-content');
+
+    // Toggle search input
+    searchIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchContainer.classList.toggle('active');
+        navbarRight.classList.toggle('search-active');
+        if (searchContainer.classList.contains('active')) {
+            searchInput.focus();
+        } else {
+            searchInput.value = '';
+            mainContent.innerHTML = '';
+            categories.forEach((category, index) => {
+                const carousel = createCarousel(category, index);
+                mainContent.appendChild(carousel);
+            });
+        }
+    });
+
+    // Handle search input
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        
+        if (searchTerm === '') {
+            mainContent.innerHTML = '';
+            categories.forEach((category, index) => {
+                const carousel = createCarousel(category, index);
+                mainContent.appendChild(carousel);
+            });
+            return;
+        }
+
+        // Filter items by search term
+        const filteredCategories = categories.map(category => ({
+            ...category,
+            items: category.items.filter(item =>
+                item.nome.toLowerCase().includes(searchTerm)
+            )
+        })).filter(category => category.items.length > 0);
+
+        // Render filtered results
+        mainContent.innerHTML = '';
+        if (filteredCategories.length === 0) {
+            const emptyMessage = document.createElement('div');
+            emptyMessage.style.cssText = `
+                padding: 40px 20px;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 18px;
+            `;
+            emptyMessage.textContent = 'Nenhum resultado encontrado para: ' + e.target.value;
+            mainContent.appendChild(emptyMessage);
+        } else {
+            filteredCategories.forEach((category, index) => {
+                const carousel = createCarousel(category, index);
+                mainContent.appendChild(carousel);
+            });
+        }
+    });
+
+    // Close search when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchContainer.contains(e.target) && !mainContent.contains(e.target)) {
+            if (searchContainer.classList.contains('active')) {
+                searchContainer.classList.remove('active');
+                navbarRight.classList.remove('search-active');
+                searchInput.value = '';
+                mainContent.innerHTML = '';
+                categories.forEach((category, index) => {
+                    const carousel = createCarousel(category, index);
+                    mainContent.appendChild(carousel);
+                });
+            }
+        }
+    });
+
+    // Close search with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+            navbarRight.classList.remove('search-active');
+            searchInput.value = '';
+            mainContent.innerHTML = '';
+            categories.forEach((category, index) => {
+                const carousel = createCarousel(category, index);
+                mainContent.appendChild(carousel);
+            });
+        }
+    });
+
 });
