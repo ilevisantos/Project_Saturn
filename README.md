@@ -11,7 +11,8 @@ Font Awesome (ícones)
 Google Fonts (Roboto)
 
 
-📁 ESTRUTURA DO PROJETO
+## 📁 ESTRUTURA DO PROJETO
+```bash
 Projeto-disney/
 ├── index.html              # Página de seleção de perfis
 ├── catalogo/
@@ -29,31 +30,35 @@ Projeto-disney/
 ├── js/
 │   ├── index.js            # Lógica da página de perfis
 │   └── script.js           # Scripts gerais (tema, dropdown)
-└── img/                    # Imagens e avatares           # Imagens e avatares
-
-
+└── img/                    # Imagens e avatares
+```
 ✨ FUNCIONALIDADES IMPLEMENTADAS
+
 1. SELEÇÃO DE PERFIS
 Criação de perfis personalizados
 Seleção de avatares
 Edição e exclusão de perfis
 Persistência no localStorage
+
 2. CATÁLOGO DE CONTEÚDO
 Carrosséis organizados por categorias
 Cards interativos com hover effects
 Showcase principal com navegação
 Sistema de pesquisa em tempo real
+
 3. SISTEMA DE PESQUISA
 Campo expansível com animação
 Filtragem por nome de filme/série
 Resultados dinâmicos
 Fechamento automático (Escape/clique fora)
+
 4. INTERFACE E UX
 Design responsivo
 Tema escuro com toggle claro/escuro
 Animações suaves
 Navegação intuitiva
 Notificações dropdown
+
 5. RECURSOS TÉCNICOS
 Drag & drop em dispositivos móveis
 Transições de página
@@ -62,6 +67,7 @@ Acessibilidade (ARIA labels)
 
 
 ▶️ COMO EXECUTAR
+
 Clone ou baixe o projeto
 Abra um terminal na pasta do projeto
 Execute:
@@ -71,6 +77,7 @@ http://localhost:8000
 
 
 🧭 NAVEGAÇÃO
+
 index.html: Seleção/gerenciamento de perfis
 catalogo/catalogo.html: Catálogo principal de conteúdo
 
